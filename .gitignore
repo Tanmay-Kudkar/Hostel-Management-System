@@ -1,0 +1,100 @@
+# ---------------------------
+# IDE / Editor settings
+# ---------------------------
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# ---------------------------
+# OS / system files
+# ---------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+
+# ---------------------------
+# Logs / runtime dumps
+# ---------------------------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------------------------
+# Environment / secrets
+# ---------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+*.local
+*.secret
+*.key
+*.pem
+
+# ---------------------------
+# Node / npm / Yarn / pnpm
+# ---------------------------
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+
+# ---------------------------
+# Build outputs / caches
+# ---------------------------
+dist/
+build/
+out/
+tmp/
+temp/
+.cache/
+.sass-cache/
+coverage/
+.nyc_output/
+
+# Project-specific keep rules:
+# This repository serves runtime assets from root dist/ and assets/libs/**/dist.
+# Keep them trackable so fresh clones work without a build step.
+!dist/
+!dist/**
+!assets/libs/**/dist/
+!assets/libs/**/dist/**
+
+# ---------------------------
+# PHP / Composer temp files
+# ---------------------------
+/vendor/
+composer.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# ---------------------------
+# Optional monorepo-style dirs
+# (kept to match common frontend/backend layouts)
+# ---------------------------
+frontend/node_modules/
+frontend/.cache/
+frontend/build/
+frontend/.env
+
+backend/target/
+backend/.env
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# ---------------------------
+# Backup / temporary files
+# ---------------------------
+*.bak
+*.tmp
+*.temp
