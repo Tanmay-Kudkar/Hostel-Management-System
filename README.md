@@ -853,12 +853,99 @@ Source of truth: `Database/hostelmsphp.sql`
 
 ```mermaid
 erDiagram
-	USERREGISTRATION ||--o{ USERLOG : "userId (logical)"
-	USERREGISTRATION ||--o{ REGISTRATION : "email/emailid (logical)"
-	ROOMS ||--o{ REGISTRATION : "room_no/roomno (logical)"
-	COURSES ||--o{ REGISTRATION : "course_fn/course (logical)"
-	ADMIN ||--o{ ADMINLOG : "adminid (logical)"
-	STATES ||--o{ REGISTRATION : "state lookup (optional)"
+
+    ADMIN {
+        INT id PK
+        VARCHAR username
+        VARCHAR password
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    ADMIN_LOG {
+        INT id PK
+        INT admin_id FK
+        VARCHAR ip_address
+        TIMESTAMP login_time
+    }
+
+    USERS {
+        INT id PK
+        VARCHAR reg_no UNIQUE
+        VARCHAR first_name
+        VARCHAR middle_name
+        VARCHAR last_name
+        VARCHAR gender
+        BIGINT contact_no
+        VARCHAR email UNIQUE
+        VARCHAR password
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    USER_LOG {
+        INT id PK
+        INT user_id FK
+        VARCHAR email_snapshot
+        VARBINARY ip_address
+        VARCHAR city
+        VARCHAR country
+        TIMESTAMP login_time
+    }
+
+    COURSES {
+        INT id PK
+        VARCHAR course_code UNIQUE
+        VARCHAR short_name
+        VARCHAR full_name
+        TIMESTAMP created_at
+    }
+
+    ROOMS {
+        INT id PK
+        INT room_number UNIQUE
+        INT capacity
+        INT fees_per_month
+        TIMESTAMP created_at
+    }
+
+    STATES {
+        INT id PK
+        VARCHAR state_name
+    }
+
+    REGISTRATIONS {
+        INT id PK
+        INT user_id FK
+        INT room_id FK
+        INT course_id FK
+
+        DATE stay_from
+        INT duration_months
+        BOOLEAN food_status
+
+        BIGINT emergency_contact
+
+        VARCHAR guardian_name
+        VARCHAR guardian_relation
+        BIGINT guardian_contact
+
+        VARCHAR address
+        VARCHAR city
+        INT pincode
+        INT state_id FK
+
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    %% Relationships
+    ADMIN ||--o{ ADMIN_LOG : logs
+    USERS ||--o{ USER_LOG : logs
+    USERS ||--o{ REGISTRATIONS : registers
+    ROOMS ||--o{ REGISTRATIONS : assigned_to
+    COURSES ||--o{ REGISTRATIONS : enrolled_in
+    STATES ||--o{ REGISTRATIONS : located_in
 ```
 
 ---
