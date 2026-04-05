@@ -871,13 +871,13 @@ erDiagram
 
     USERS {
         INT id PK
-        VARCHAR reg_no UNIQUE
+        VARCHAR reg_no
         VARCHAR first_name
         VARCHAR middle_name
         VARCHAR last_name
         VARCHAR gender
         BIGINT contact_no
-        VARCHAR email UNIQUE
+        VARCHAR email
         VARCHAR password
         TIMESTAMP created_at
         TIMESTAMP updated_at
@@ -895,7 +895,7 @@ erDiagram
 
     COURSES {
         INT id PK
-        VARCHAR course_code UNIQUE
+        VARCHAR course_code
         VARCHAR short_name
         VARCHAR full_name
         TIMESTAMP created_at
@@ -903,7 +903,7 @@ erDiagram
 
     ROOMS {
         INT id PK
-        INT room_number UNIQUE
+        INT room_number
         INT capacity
         INT fees_per_month
         TIMESTAMP created_at
@@ -939,13 +939,19 @@ erDiagram
         TIMESTAMP updated_at
     }
 
-    %% Relationships
-    ADMIN ||--o{ ADMIN_LOG : logs
-    USERS ||--o{ USER_LOG : logs
-    USERS ||--o{ REGISTRATIONS : registers
-    ROOMS ||--o{ REGISTRATIONS : assigned_to
-    COURSES ||--o{ REGISTRATIONS : enrolled_in
-    STATES ||--o{ REGISTRATIONS : located_in
+    %% ================= RELATIONSHIPS =================
+
+    ADMIN ||--o{ ADMIN_LOG : "records login activity"
+
+    USERS ||--o{ USER_LOG : "generates login logs"
+
+    USERS ||--o{ REGISTRATIONS : "creates booking"
+
+    ROOMS ||--o{ REGISTRATIONS : "allocated to"
+
+    COURSES ||--o{ REGISTRATIONS : "belongs to"
+
+    STATES ||--o{ REGISTRATIONS : "address reference"
 ```
 
 ---
