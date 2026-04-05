@@ -60,10 +60,18 @@ temp/
 coverage/
 .nyc_output/
 
+# Project-specific keep rules:
+# This repository serves runtime assets from root dist/ and assets/libs/**/dist.
+# Keep them trackable so fresh clones work without a build step.
+!dist/
+!dist/**
+!assets/libs/**/dist/
+!assets/libs/**/dist/**
+
 # ---------------------------
 # PHP / Composer temp files
 # ---------------------------
-vendor/
+/vendor/
 composer.phar
 .phpunit.result.cache
 .php-cs-fixer.cache
